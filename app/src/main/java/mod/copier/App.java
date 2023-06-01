@@ -66,6 +66,7 @@ public class App {
                 if (file.isFile() && pattern.matcher(file.getName()).matches()) {
                     file.delete();
                 }
+
             }
         }
     }
