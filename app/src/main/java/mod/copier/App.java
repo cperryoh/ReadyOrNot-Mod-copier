@@ -7,7 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.google.common.io.Files;
 
@@ -51,6 +54,23 @@ public class App {
         return navToPaks(modIODir.getParentFile());
     }
 
+    public static void removeOldMods(File paksDir) {
+        List<String> matchingFiles = new ArrayList<>();
+
+        // Compile the regex pattern
+        Pattern pattern = Pattern.compile("pakchunk9+.*\\.pak$");
+
+        // Get all files in the directory
+        File[] files = paksDir.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && pattern.matcher(file.getName()).matches()) {
+                    file.delete();
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         // Get game path
         Scanner input = new Scanner(System.in);
@@ -71,6 +91,9 @@ public class App {
         // Find Paks folder
         File paks = navToPaks(mods);
         System.out.println("Paks: " + paks.getAbsolutePath());
+        removeOldMods(paks);
+
+        // delete old mods
 
         // Get mod folders
         File[] modList = mods.listFiles();
