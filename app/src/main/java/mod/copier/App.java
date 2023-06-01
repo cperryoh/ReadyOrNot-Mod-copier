@@ -55,7 +55,6 @@ public class App {
     }
 
     public static void removeOldMods(File paksDir) {
-        List<String> matchingFiles = new ArrayList<>();
 
         // Compile the regex pattern
         Pattern pattern = Pattern.compile("pakchunk9+.*\\.pak$");
@@ -92,8 +91,6 @@ public class App {
         File paks = navToPaks(mods);
         System.out.println("Paks: " + paks.getAbsolutePath());
         removeOldMods(paks);
-
-        // delete old mods
 
         // Get mod folders
         File[] modList = mods.listFiles();

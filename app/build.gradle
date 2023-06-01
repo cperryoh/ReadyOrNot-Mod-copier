@@ -38,7 +38,7 @@ launch4j {
     // Additional configuration options if needed
 }
 
-jar {
+shadowJar  {
     manifest {
         attributes 'Main-Class': application.mainClass
     }
